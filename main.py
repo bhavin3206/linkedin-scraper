@@ -36,7 +36,8 @@ DB_CONFIG = {
 
 # Scraper configuration
 SCRAPER_CONFIG = {
-    "num_drivers": 10,
+    "linkedin_url" : "https://www.linkedin.com/jobs/search/?currentJobId=4141450053&geoId=103644278&keywords=python%20developer&origin=JOB_SEARCH_PAGE_LOCATION_AUTOCOMPLETE&refresh=true",
+    "num_drivers": 10, # Default is 10, because it's better and faster, you can use more than 10 if you have powerful pc 
     "user_agents": [
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
         "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36",
@@ -545,7 +546,7 @@ def main():
             return
         
         # Run URL scraper in a thread
-        url_thread = Thread(target=JobScraper.get_job_links, args=(linkedin_url, main_driver))
+        url_thread = Thread(target=JobScraper.get_job_links, args=(SCRAPER_CONFIG["linkedin_url"], main_driver))
         url_thread.start()
         
         # Start worker threads
